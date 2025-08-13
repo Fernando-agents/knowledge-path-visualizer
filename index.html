@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Knowledge Path Visualizer</title>
+    <!-- Google fonts for serif headings and body text -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700&family=Lora:wght@400;700&display=swap"
+    />
+    <!-- Our custom stylesheet that defines the dark navy and gold Civ VI theme -->
+    <link rel="stylesheet" href="style.css" />
+    <!-- React and supporting libraries loaded from CDNs -->
+    <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <!-- Display any syntax or runtime errors on the page instead of failing silently -->
+    <script>
+      window.onerror = function (msg, url, line, col) {
+        var existing = document.getElementById('error-display');
+        var text = String(msg) + ' at line ' + line + ':' + col;
+        if (existing) {
+          existing.textContent = text;
+        } else {
+          var p = document.createElement('pre');
+          p.id = 'error-display';
+          p.style.color = 'red';
+          p.textContent = text;
+          document.body.prepend(p);
+        }
+        return false;
+      };
+    </script>
+    <!-- D3.js from CDN for the force-directed graph -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.2/d3.min.js"></script>
+  </head>
+  <body>
+    <!-- Root container where our React application will mount -->
+    <div id="root"></div>
+    <!-- Load the plain JavaScript React app.  This file contains the
+         KnowledgeGraphApp implemented without JSX, so it can run directly in the browser. -->
+    <script src="react_app.js"></script>
+  </body>
+</html>
