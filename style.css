@@ -1,0 +1,231 @@
+/*
+  Global styles for the Knowledge Path Visualizer.  The palette and
+  typography evoke a Civilization VI research card: dark navy backgrounds,
+  ivory serif text and glowing gold accents.  The layout is responsive and
+  flex‑based for simplicity.
+*/
+
+:root {
+  --navy-dark: #0a1a2f;
+  --navy-mid: #13294b;
+  --navy-light: #203f6d;
+  --gold: #ffd700;
+  --gold-light: #ffe580;
+  --ivory: #f5f5dc;
+  --text-body: #e0e0d0;
+  --locked: #3a4f78;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Lora', serif;
+  background: linear-gradient(160deg, var(--navy-dark), var(--navy-mid));
+  color: var(--ivory);
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Navigation bar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  background: linear-gradient(90deg, var(--navy-dark), var(--navy-light));
+  border-bottom: 1px solid var(--gold);
+  font-family: 'Merriweather', serif;
+  font-weight: 700;
+}
+
+.navbar-left {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.navbar .title {
+  font-size: 1.2rem;
+  color: var(--gold);
+  text-shadow: 0 0 4px rgba(255, 215, 0, 0.5);
+}
+
+.hamburger {
+  font-size: 1.5rem;
+  background: none;
+  border: none;
+  color: var(--gold);
+  cursor: pointer;
+  padding: 0.25rem;
+}
+
+.navbar-right {
+  display: flex;
+  gap: 1rem;
+  font-size: 0.9rem;
+}
+
+.navbar-right label {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  color: var(--text-body);
+  cursor: pointer;
+}
+
+.navbar-right input[type='checkbox'] {
+  accent-color: var(--gold);
+}
+
+/* Graph container fills remaining space */
+#graph-container {
+  flex-grow: 1;
+  position: relative;
+  overflow: hidden;
+}
+
+svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* Node appearance */
+.node rect {
+  rx: 10px;
+  ry: 10px;
+  stroke: var(--gold);
+  stroke-width: 2;
+  fill: var(--navy-light);
+  cursor: pointer;
+  transition: fill 0.3s ease, opacity 0.3s ease;
+}
+
+.node.locked rect {
+  stroke: var(--locked);
+  fill: var(--locked);
+  opacity: 0.4;
+  cursor: default;
+}
+
+.node text {
+  pointer-events: none;
+  fill: var(--ivory);
+  font-size: 0.75rem;
+  font-family: 'Merriweather', serif;
+  text-anchor: middle;
+  dominant-baseline: middle;
+}
+
+/* Link appearance */
+.link line {
+  stroke: var(--gold);
+  stroke-width: 1.5px;
+  opacity: 0.5;
+}
+
+.hidden-links .link line {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Modal styling */
+#modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(4px);
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.hidden {
+  display: none;
+}
+
+.modal {
+  background: linear-gradient(180deg, var(--navy-mid), var(--navy-dark));
+  border: 2px solid var(--gold);
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+  border-radius: 8px;
+  width: 90%;
+  max-width: 500px;
+  max-height: 80%;
+  padding: 1rem;
+  overflow-y: auto;
+  color: var(--ivory);
+  font-family: 'Lora', serif;
+  position: relative;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--gold);
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.5rem;
+}
+
+.modal-header h2 {
+  color: var(--gold);
+  font-family: 'Merriweather', serif;
+  font-size: 1.2rem;
+  text-transform: uppercase;
+}
+
+#modal-close {
+  background: none;
+  border: none;
+  color: var(--gold);
+  font-size: 1.25rem;
+  cursor: pointer;
+}
+
+.modal-body h3 {
+  margin-top: 0.5rem;
+  margin-bottom: 0.25rem;
+  color: var(--gold);
+  font-family: 'Merriweather', serif;
+}
+
+.modal-body ul {
+  list-style-type: none;
+  padding-left: 0;
+  margin-bottom: 0.75rem;
+}
+
+.modal-body li {
+  margin-bottom: 0.25rem;
+  font-size: 0.9rem;
+}
+
+.modal-body select {
+  width: 100%;
+  padding: 0.25rem;
+  font-size: 1rem;
+  background: var(--navy-light);
+  color: var(--ivory);
+  border: 1px solid var(--gold);
+  border-radius: 4px;
+  outline: none;
+}
+
+/* Responsive adjustments */
+@media (min-width: 600px) {
+  .navbar .title {
+    font-size: 1.5rem;
+  }
+  .node text {
+    font-size: 0.8rem;
+  }
+}
