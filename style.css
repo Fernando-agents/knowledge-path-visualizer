@@ -148,8 +148,15 @@ svg {
   z-index: 1000;
 }
 
+/*
+  Utility class to hide elements.  We mark this with !important so
+  it overrides higher‑specificity selectors like #modal-overlay which
+  set display:flex.  Without !important the overlay remains visible
+  because the id selector wins.  See: https://specificity.keegan.st/ for
+  details about selector precedence.
+*/
 .hidden {
-  display: none;
+  display: none !important;
 }
 
 .modal {
